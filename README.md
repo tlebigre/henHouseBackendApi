@@ -47,7 +47,7 @@ GET /getAllCamera
 ```
 ### Remove a camera by its id
 ```http
-DELETE /state/set/{state}
+DELETE /removeCamera/{id}
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :------------------------- |
