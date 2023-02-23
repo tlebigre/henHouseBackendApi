@@ -1,7 +1,7 @@
 [![en](https://img.shields.io/badge/lang-en-ab4b52.svg)](https://github.com/tlebigre/henHouseBackendApi/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-318ce7.svg)](https://github.com/tlebigre/henHouseBackendApi/blob/main/README.fr.md)
 
-> :warning: ***Cette api fonctionne seulement si [henHouseBoardBackendApi](https://github.com/tlebigre/henHouseBoardBackendApi) fonctionne !***
+> :warning: ***Cette api fonctionne seulement si [henHouseBoardBackendApi](https://github.com/tlebigre/henHouseBoardBackendApi) est en fonctionnement !***
 
 # API Reference
 ## Camera
@@ -39,7 +39,7 @@ GET /getCamera/{id}
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
-|  `id`  |  `int`  |  **Required**. Identifiant |
+|  `id`  |  `int`  |  **Requis**. Identifiant |
 
 ### Retourne toutes les caméras (liste de CameraDto)
 ```http
@@ -51,38 +51,38 @@ DELETE /removeCamera/{id}
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :------------------------- |
-|  `id`  |  `int`  |  **Required**. Identifiant|
+|  `id`  |  `int`  |  **Requis**. Identifiant|
 
-## Henhouse
-### Save hen house parameters
+## Poulailler
+### Sauvegarde des paramètres du poulailler
 ```http
 POST /saveHenHouse
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :------------------------- |
-|  `henHouseDto`  |  `HenHouseDto `  |  **Required**. Hen house parameters to save |
+|  `henHouseDto`  |  `HenHouseDto `  |  **Requis**. Paramètres du poulailler à sauvegarder |
 
-***HenHouseDto class*** (all is **Required**)
+***HenHouseDto class*** (tout est **Requis**)
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
-|  `getUpMorning`  |  `boolean` | If true : "get up" feature activated |
-|  `stopLimits`  |  `boolean` | If true : engine no longer powered when top or bottom limit are reached |
-|  `stopEngine`  |  `boolean` | If true : engine no longer powered when it doesn't work |
-|  `hourOpening`  |  `String` | Opening hour |
-|  `hourOpeningMax`  |  `String` | Max opening hour (in case of power failure)|
-|  `state`  |  `int` | Engine state |
-|  `topLimit`  |  `int` | Engine top limit |
-|  `bottomLimit`  |  `int` | Engine bottom limit |
-|  `speed`  |  `int` | Engine speed |
+|  `getUpMorning`  |  `boolean` | Si vrai : Ouverture automatique activée |
+|  `stopLimits`  |  `boolean` | Si vrai : Le moteur n'est plus alimenté lorsque la butée haute ou basse est atteinte|
+|  `stopEngine`  |  `boolean` | Si vrai : Le moteur n'est plus alimenté lorsqu'il n'est pas en fonctionnement |
+|  `hourOpening`  |  `String` | Heure d'ouverture |
+|  `hourOpeningMax`  |  `String` | Heure d'ouverture maximale (en cas de coupure d'éléctricité)|
+|  `state`  |  `int` | Etat/position du moteur |
+|  `topLimit`  |  `int` | Limite haute du moteur |
+|  `bottomLimit`  |  `int` | Limite basse du moteur |
+|  `speed`  |  `int` | Vitesse du moteur |
 |  `date`  |  `String` | Date (format: dd/MM/yyyy) |
-|  `time`  |  `String` | Time (format: HH:mm) |
+|  `time`  |  `String` | Heure (format: HH:mm) |
 
-### Returns hen house parameters (HenHouseDto)
+### Retourne les paramètres du poulailler (HenHouseDto)
 ```http
 GET /getHenHouse
 ```
 
-### Returns date time (DateTimeDto)
+### Retourne la date et l'heure (DateTimeDto)
 ```http
 GET /getDateTime
 ```
@@ -90,23 +90,23 @@ GET /getDateTime
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `date`  |  `String ` | Date (format: dd/MM/yyyy) |
-|  `time`  |  `String ` | Time (format: HH:mm) |
+|  `time`  |  `String ` | Heure (format: HH:mm) |
 
-### Save engine state
+### Enregistre l'état/position du moteur
 ```http
 POST /saveState
 ```
-***StateDto class*** (all is **Required**)
+***StateDto class*** (tout est **Required**)
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
-|  `state`  |  `int ` | Engine state |
+|  `state`  |  `int ` | Etat du moteur |
 
-### Returns engine state (StateDto)
+### Retourne l'état/position du moteur (StateDto)
 ```http
 GET /getState
 ```
-## Opening
-### Save last opening
+## Ouverture
+### Enregistre la dernière ouverture
 ```http
 POST /saveLastOpening
 ```
@@ -115,17 +115,17 @@ POST /saveLastOpening
 | :-------- | :------- | :-------------------------------- |
 |  `date`  |  `String ` | Date (format: dd/MM/yyyy) |
 
-### Returns last opening (LastOpeningDto)
+### Retourne la dernière ouverture (LastOpeningDto)
 ```http
 GET /getLastOpening
 ```
 
-### Open
+### Ouvre
 ```http
 GET /open
 ```
 
-### Close
+### Ferme
 ```http
 GET /close
 ```
