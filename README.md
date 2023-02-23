@@ -113,7 +113,7 @@ POST /saveLastOpening
 ***LastOpeningDto class*** (all is **Required**)
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
-|  `date`  |  `String ` | DAte (format: dd/MM/yyyy) |
+|  `date`  |  `String ` | Date (format: dd/MM/yyyy) |
 
 ### Returns last opening (LastOpeningDto)
 ```http
