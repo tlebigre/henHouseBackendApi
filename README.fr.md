@@ -9,6 +9,10 @@ Cette API permet :
 * gérer le moteur (vitesse, limite haute, limite basse, état).
 * gérer une liste de caméras (nom et URL).
 
+Construire l'application avec : **gradlew build**  
+Lancer l'application avec : **gradlew bootRun**  
+Récupérer le fichier war : **gradlew bootWar** (in *build/libs*)
+
 # API Reference
 ## Camera
 ### Enregistrer une caméra
