@@ -9,6 +9,10 @@ This API allows :
 * manage engine (speed, top limit, bottom limit, state).
 * manage a camera (name and url) list. 
 
+Build app with : **gradlew build**  
+Run app with : **gradlew bootRun**  
+Get war file : **gradlew bootWar** (in *build/libs*)
+
 # API Reference
 ## Camera
 ### Save a camera
