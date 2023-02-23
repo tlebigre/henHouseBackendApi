@@ -3,6 +3,12 @@
 
 > :warning: ***Cette api fonctionne seulement si [henHouseBoardBackendApi](https://github.com/tlebigre/henHouseBoardBackendApi) est en fonctionnement !***
 
+Cette API permet :
+* gérer l'ouverture du poulailler à une certaine heure (avec une horloge permanente).
+* ouvrir/fermer la porte avec les boutons ou l'API.
+* gérer le moteur (vitesse, limite haute, limite basse, état).
+* gérer une liste de caméras (nom et URL).
+
 # API Reference
 ## Camera
 ### Enregistrer une caméra
