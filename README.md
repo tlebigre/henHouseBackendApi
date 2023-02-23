@@ -5,8 +5,8 @@
 
 This API allows :
 * manage the opening of hen house door at a certain time (with real-time clock).
-* open/close the door with button or api command
-* manage engine (speed, top limit, bottom limit, state)
+* open/close the door with buttons or api.
+* manage engine (speed, top limit, bottom limit, state).
 * manage a camera (name and url) list. 
 
 # API Reference
