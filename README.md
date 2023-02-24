@@ -1,6 +1,8 @@
 [![en](https://img.shields.io/badge/lang-en-ab4b52.svg)](https://github.com/tlebigre/henHouseBackendApi/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-318ce7.svg)](https://github.com/tlebigre/henHouseBackendApi/blob/main/README.fr.md)
 
+# Hen house backend Api
+
 > :warning: ***This api work only if [henHouseBoardBackendApi](https://github.com/tlebigre/henHouseBoardBackendApi) run !***
 
 This API allows :
@@ -9,9 +11,25 @@ This API allows :
 * manage engine (speed, top limit, bottom limit, state).
 * manage a camera (name and url) list. 
 
-Build app with : **gradlew build**  
-Run app with : **gradlew bootRun**  
-Get war file : **gradlew bootWar** (in *build/libs*)
+## Developing
+
+Start a development server:
+
+```bash
+gradlew bootRun
+
+```
+
+## Building
+
+```bash
+gradlew build
+```
+
+To create war file (in *build/libs*):
+```bash
+gradlew bootWar
+```
 
 # API Reference
 ## Camera
