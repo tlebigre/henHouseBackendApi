@@ -1,6 +1,8 @@
 [![en](https://img.shields.io/badge/lang-en-ab4b52.svg)](https://github.com/tlebigre/henHouseBackendApi/blob/main/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-318ce7.svg)](https://github.com/tlebigre/henHouseBackendApi/blob/main/README.fr.md)
 
+# Poulailler backend Api
+
 > :warning: ***Cette api fonctionne seulement si [henHouseBoardBackendApi](https://github.com/tlebigre/henHouseBoardBackendApi) est en fonctionnement !***
 
 Cette API permet :
@@ -9,9 +11,25 @@ Cette API permet :
 * gérer le moteur (vitesse, limite haute, limite basse, état).
 * gérer une liste de caméras (nom et URL).
 
-Construire l'application avec : **gradlew build**  
-Lancer l'application avec : **gradlew bootRun**  
-Récupérer le fichier war : **gradlew bootWar** (in *build/libs*)
+## Lancer
+
+Lancer le serveur de développement:
+
+```bash
+gradlew bootRun
+```
+
+## Construire
+
+```bash
+gradlew build
+```
+
+Pour créer un fichier war (dans *build/libs*):
+```bash
+gradlew bootWar
+```
+
 
 # API Reference
 ## Camera
