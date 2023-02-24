@@ -19,12 +19,12 @@ Récupérer le fichier war : **gradlew bootWar** (in *build/libs*)
 ```http
 POST /saveCamera
 ```
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :------------------------- |
 |  `simpleCameraDto`  |  `SimpleCameraDto`  |  **Requis**. Caméra à enregistrer |
 
 ***SimpleCameraDto class*** (tout est **Requis**)
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `name`  |  `int`  |  Nom |
 |  `url`  |  `int`  |  URL |
@@ -32,12 +32,12 @@ POST /saveCamera
 ```http
 POST /editCamera
 ```
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `cameraDto`  |  `CameraDto`  |  **Requis**. Caméra à modifier |
 
 ***CameraDto class*** (Tout est **Requis**)
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `id`  |  `int`  |  Identifiant |
 |  `name`  |  `int`  |  Nom |
@@ -47,7 +47,7 @@ POST /editCamera
 ```http
 GET /getCamera/{id}
 ```
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `id`  |  `int`  |  **Requis**. Identifiant |
 
@@ -59,7 +59,7 @@ GET /getAllCamera
 ```http
 DELETE /removeCamera/{id}
 ```
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :------------------------- |
 |  `id`  |  `int`  |  **Requis**. Identifiant|
 
@@ -68,12 +68,12 @@ DELETE /removeCamera/{id}
 ```http
 POST /saveHenHouse
 ```
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :------------------------- |
 |  `henHouseDto`  |  `HenHouseDto `  |  **Requis**. Paramètres du poulailler à sauvegarder |
 
 ***HenHouseDto class*** (tout est **Requis**)
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `getUpMorning`  |  `boolean` | Si vrai : Ouverture automatique activée |
 |  `stopLimits`  |  `boolean` | Si vrai : Le moteur n'est plus alimenté lorsque la butée haute ou basse est atteinte|
@@ -107,7 +107,7 @@ GET /getDateTime
 POST /saveState
 ```
 ***StateDto class*** (tout est **Required**)
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `state`  |  `int ` | Etat du moteur |
 
@@ -121,7 +121,7 @@ GET /getState
 POST /saveLastOpening
 ```
 ***LastOpeningDto class*** (all is **Required**)
-| Parameter | Type | Description |
+| Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
 |  `date`  |  `String ` | Date (format: dd/MM/yyyy) |
 
