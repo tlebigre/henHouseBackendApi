@@ -59,6 +59,14 @@ public class HenHouseWhileLoopServiceImpl implements HenHouseWhileLoopService {
 			firstInit = false;
 			blockOpen = false;
 		}
+		else
+		{
+			lastOpeningRepository.get().ifPresent(o -> lastOpening = o.getDate());
+			dateTimeRepository.get().ifPresent(d -> {
+				date = d.getDate();
+				time = d.getTime();
+			});
+		}
 
 		if (forceUp) {
 			up(true);
@@ -68,8 +76,6 @@ public class HenHouseWhileLoopServiceImpl implements HenHouseWhileLoopService {
 			down(true);
 			forceDown = false;
 		}
-
-		lastOpeningRepository.get().ifPresent(o -> lastOpening = o.getDate());
 
 		if (gpioRepository.getGpioState(UP_GPIO))
 			up(false);
