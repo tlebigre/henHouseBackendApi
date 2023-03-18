@@ -23,14 +23,14 @@ public class OpeningController {
 	private HenHouseWhileLoopService henHouseWhileLoopService;
 	
 	@CrossOrigin
-	@PostMapping("/saveLastOpening")
+	@PostMapping("/lastOpening")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void saveLastOpening(@RequestBody LastOpeningDto stateDto) {
 		lastOpeningService.saveLastOpening(stateDto);
 	}
 
 	@CrossOrigin
-	@GetMapping("/getLastOpening")
+	@GetMapping("/lastOpening")
 	public LastOpeningDto getLastOpening() {
 		return lastOpeningService.getLastOpening();
 	}

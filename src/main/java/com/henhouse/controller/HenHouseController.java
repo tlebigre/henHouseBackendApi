@@ -21,33 +21,33 @@ public class HenHouseController {
 	private HenHouseService henHouseService;
 
 	@CrossOrigin
-	@PostMapping("/saveHenHouse")
+	@PostMapping("/henHouse")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void saveHenHouse(@RequestBody HenHouseDto henHouseDto) {
 		henHouseService.saveHenHouse(henHouseDto);
 	}
 
 	@CrossOrigin
-	@PostMapping("/saveState")
+	@PostMapping("/state")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void saveState(@RequestBody StateDto stateDto) {
 		henHouseService.saveState(stateDto);
 	}
 
 	@CrossOrigin
-	@GetMapping("/getHenHouse")
+	@GetMapping("/henHouse")
 	public HenHouseDto getHenHouse() {
 		return henHouseService.getHenHouse();
 	}
 
 	@CrossOrigin
-	@GetMapping("/getState")
+	@GetMapping("/state")
 	public StateDto getState() {
 		return henHouseService.getState();
 	}
 	
 	@CrossOrigin
-	@GetMapping("/getDateTime")
+	@GetMapping("/dateTime")
 	public DateTimeDto getDateTime() {
 		return henHouseService.getDateTime();
 	}

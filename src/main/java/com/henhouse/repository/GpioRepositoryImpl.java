@@ -1,46 +1,49 @@
 package com.henhouse.repository;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ClientResponse;
-import org.springframework.web.reactive.function.client.WebClient;
 
+import com.henhouse.board.BoardGrpc;
+import com.henhouse.board.EngineRequest;
+import com.henhouse.board.GpioGetRequest;
+import com.henhouse.board.GpioSetRequest;
+import com.henhouse.board.StateGetRequest;
+import com.henhouse.board.StateSetRequest;
+import com.henhouse.board.BoardGrpc.BoardBlockingStub;
 import com.henhouse.model.EngineAction;
 import com.henhouse.service.ConstantsService;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 @Repository
 public class GpioRepositoryImpl implements GpioRepository {
 
-	private WebClient webClient = WebClient.builder().baseUrl(ConstantsService.GPIO_API_URL).build();
+	private final BoardBlockingStub blockingStub;
+
+	public GpioRepositoryImpl() {
+		ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(ConstantsService.GPIO_API_URL, 9000)
+				.usePlaintext();
+		ManagedChannel channel = channelBuilder.build();
+		blockingStub = BoardGrpc.newBlockingStub(channel);
+	}
 
 	@Override
 	public boolean getGpioState(int gpio) {
-		return webClient.get().uri("gpio/get/" + String.valueOf(gpio)).retrieve().bodyToMono(Boolean.class).block();
+		GpioGetRequest gpioGetRequest = GpioGetRequest.newBuilder().setGpio(gpio).build();
+		return blockingStub.getGpio(gpioGetRequest).getValue();
 	}
 
 	@Override
 	public void saveGpioState(int gpio, boolean state) {
-		webClient.get().uri("gpio/set/" + String.valueOf(gpio) + "/" + (state ? "True" : "False")).retrieve()
-				.bodyToMono(ClientResponse.class).block();
+		GpioSetRequest gpioSetRequest = GpioSetRequest.newBuilder().setGpio(gpio).setValue(state).build();
+		blockingStub.setGpio(gpioSetRequest);
 	}
 
 	@Override
 	public void engineRun(int gpio, int speed, int buttonGpio, int limit, EngineAction engineAction) {
-
-		Map<String, String> engineMap = new HashMap<String, String>();
-		engineMap.put("gpio", String.valueOf(gpio));
-		engineMap.put("speed", String.valueOf(speed));
-		engineMap.put("buttonGpio", String.valueOf(buttonGpio));
-		engineMap.put("limit", String.valueOf(limit));
-		engineMap.put("isUp", String.valueOf(engineAction.isUp()));
-		engineMap.put("isForce", String.valueOf(engineAction.isForce()));
-
-		webClient.post().uri("engineUpOrDown/set").contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(engineMap)).retrieve().bodyToMono(ClientResponse.class).block();
+		EngineRequest engineRequest = EngineRequest.newBuilder().setGpio(gpio).setSpeed(speed).setButtonGpio(buttonGpio)
+				.setLimit(limit).setIsForce(engineAction.isForce()).setIsUp(engineAction.isUp()).build();
+		blockingStub.engineUpOrDown(engineRequest);
 	}
 
 	@Override
@@ -50,11 +53,13 @@ public class GpioRepositoryImpl implements GpioRepository {
 
 	@Override
 	public int getEngineState() {
-		return webClient.get().uri("state/get").retrieve().bodyToMono(Integer.class).block();
+		StateGetRequest stateGetRequest = StateGetRequest.newBuilder().build();
+		return blockingStub.getState(stateGetRequest).getValue();
 	}
 
 	@Override
 	public void saveEngineState(int state) {
-		webClient.get().uri("state/set/" + String.valueOf(state)).retrieve().bodyToMono(ClientResponse.class).block();
+		StateSetRequest stateSetRequest = StateSetRequest.newBuilder().setValue(state).build();
+		blockingStub.setState(stateSetRequest);
 	}
 }

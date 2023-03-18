@@ -4,44 +4,50 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ClientResponse;
-import org.springframework.web.reactive.function.client.WebClient;
 
+import com.henhouse.board.BoardGrpc;
+import com.henhouse.board.BoardGrpc.BoardBlockingStub;
+import com.henhouse.board.DateTimeGetRequest;
+import com.henhouse.board.DateTimeReply;
+import com.henhouse.board.DateTimeSetRequest;
 import com.henhouse.model.DateTime;
 import com.henhouse.service.ConstantsService;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 @Repository
 public class DateTimeRepositoryImpl implements DateTimeRepository {
 
 	private static final Logger LOGGER = LogManager.getLogger(DateTimeRepositoryImpl.class);
+	
+	private final BoardBlockingStub blockingStub;
 
-	private WebClient webClient = WebClient.builder().baseUrl(ConstantsService.GPIO_API_URL).build();
+	public DateTimeRepositoryImpl() {
+		ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(ConstantsService.GPIO_API_URL, 9000)
+				.usePlaintext();
+		ManagedChannel channel = channelBuilder.build();
+		blockingStub = BoardGrpc.newBlockingStub(channel);
+	}
 
+	
 	@Override
 	public Optional<DateTime> get() {
-		return webClient.get().uri("dateTime/get").accept(MediaType.APPLICATION_JSON).retrieve()
-				.bodyToMono(DateTime.class).blockOptional();
+		DateTimeGetRequest dateTimeGetRequest = DateTimeGetRequest.newBuilder().build();
+		DateTimeReply dateTimeReply = blockingStub.getDateTime(dateTimeGetRequest);
+		return Optional.of(new DateTime(dateTimeReply.getDate(),dateTimeReply.getTime()));
 	}
 
 	@Override
 	public void save(DateTime dateTime) {
-		Map<String, String> dateTimeWithDayOfWeekMap = new HashMap<String, String>();
 		String date = dateTime.getDate();
-		dateTimeWithDayOfWeekMap.put("date", date);
-		dateTimeWithDayOfWeekMap.put("time", dateTime.getTime());
-		dateTimeWithDayOfWeekMap.put("dayOfWeek", String.valueOf(getDayOfWeek(date)));
-
-		webClient.post().uri("dateTime/set").contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(dateTimeWithDayOfWeekMap)).retrieve().bodyToMono(ClientResponse.class).block();;
+		DateTimeSetRequest dateTimeSetRequest = DateTimeSetRequest.newBuilder().setDate(date).setTime(dateTime.getTime()).setDayOfWeek(getDayOfWeek(date)).build();
+		blockingStub.setDateTime(dateTimeSetRequest);
 	}
 
 	private static int getDayOfWeek(String date) {
