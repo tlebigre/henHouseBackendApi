@@ -35,7 +35,7 @@ gradlew bootWar
 ## Camera
 ### Save a camera
 ```http
-POST /saveCamera
+POST /camera
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :------------------------- |
@@ -48,7 +48,7 @@ POST /saveCamera
 |  `url`  |  `int`  |  URL |
 ### Edit a camera
 ```http
-POST /editCamera
+PUT /camera
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
@@ -63,7 +63,7 @@ POST /editCamera
 
 ### Returns a camera (CameraDto) by its id
 ```http
-GET /getCamera/{id}
+GET /camera/{id}
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :-------------------------------- |
@@ -71,11 +71,11 @@ GET /getCamera/{id}
 
 ### Returns all cameras (list of CameraDto)
 ```http
-GET /getAllCamera
+GET /cameras
 ```
 ### Remove a camera by its id
 ```http
-DELETE /removeCamera/{id}
+DELETE /camera/{id}
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :------------------------- |
@@ -84,7 +84,7 @@ DELETE /removeCamera/{id}
 ## Henhouse
 ### Save hen house parameters
 ```http
-POST /saveHenHouse
+POST /henHouse
 ```
 | Parameter | Type | Description |
 | :-------- | :------- | :------------------------- |
@@ -107,12 +107,12 @@ POST /saveHenHouse
 
 ### Returns hen house parameters (HenHouseDto)
 ```http
-GET /getHenHouse
+GET /henHouse
 ```
 
 ### Returns date time (DateTimeDto)
 ```http
-GET /getDateTime
+GET /dateTime
 ```
 ***DateTimeDto class***
 | Parameter | Type | Description |
@@ -122,7 +122,7 @@ GET /getDateTime
 
 ### Save engine state
 ```http
-POST /saveState
+POST /state
 ```
 ***StateDto class*** (all is **Required**)
 | Parameter | Type | Description |
@@ -131,12 +131,12 @@ POST /saveState
 
 ### Returns engine state (StateDto)
 ```http
-GET /getState
+GET /state
 ```
 ## Opening
 ### Save last opening
 ```http
-POST /saveLastOpening
+POST /lastOpening
 ```
 ***LastOpeningDto class*** (all is **Required**)
 | Parameter | Type | Description |
@@ -145,7 +145,7 @@ POST /saveLastOpening
 
 ### Returns last opening (LastOpeningDto)
 ```http
-GET /getLastOpening
+GET /lastOpening
 ```
 
 ### Open
