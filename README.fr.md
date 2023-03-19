@@ -35,7 +35,7 @@ gradlew bootWar
 ## Camera
 ### Enregistrer une caméra
 ```http
-POST /saveCamera
+POST /camera
 ```
 | Paramètre | Type | Description |
 | :-------- | :------- | :------------------------- |
@@ -48,7 +48,7 @@ POST /saveCamera
 |  `url`  |  `int`  |  URL |
 ### Modifier une caméra
 ```http
-POST /editCamera
+PUT /camera
 ```
 | Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
@@ -63,7 +63,7 @@ POST /editCamera
 
 ### Retourne une caméra (CameraDto) par son identifiant
 ```http
-GET /getCamera/{id}
+GET /camera/{id}
 ```
 | Paramètre | Type | Description |
 | :-------- | :------- | :-------------------------------- |
@@ -71,11 +71,11 @@ GET /getCamera/{id}
 
 ### Retourne toutes les caméras (liste de CameraDto)
 ```http
-GET /getAllCamera
+GET /cameras
 ```
 ### Supprime une caméra par son identifiant
 ```http
-DELETE /removeCamera/{id}
+DELETE /camera/{id}
 ```
 | Paramètre | Type | Description |
 | :-------- | :------- | :------------------------- |
@@ -84,7 +84,7 @@ DELETE /removeCamera/{id}
 ## Poulailler
 ### Sauvegarde des paramètres du poulailler
 ```http
-POST /saveHenHouse
+POST /henHouse
 ```
 | Paramètre | Type | Description |
 | :-------- | :------- | :------------------------- |
@@ -107,12 +107,12 @@ POST /saveHenHouse
 
 ### Retourne les paramètres du poulailler (HenHouseDto)
 ```http
-GET /getHenHouse
+GET /henHouse
 ```
 
 ### Retourne la date et l'heure (DateTimeDto)
 ```http
-GET /getDateTime
+GET /dateTime
 ```
 ***DateTimeDto class***
 | Parameter | Type | Description |
@@ -122,7 +122,7 @@ GET /getDateTime
 
 ### Enregistre l'état/position du moteur
 ```http
-POST /saveState
+POST /state
 ```
 ***StateDto class*** (tout est **Required**)
 | Paramètre | Type | Description |
@@ -131,12 +131,12 @@ POST /saveState
 
 ### Retourne l'état/position du moteur (StateDto)
 ```http
-GET /getState
+GET /state
 ```
 ## Ouverture
 ### Enregistre la dernière ouverture
 ```http
-POST /saveLastOpening
+POST /lastOpening
 ```
 ***LastOpeningDto class*** (all is **Required**)
 | Paramètre | Type | Description |
@@ -145,7 +145,7 @@ POST /saveLastOpening
 
 ### Retourne la dernière ouverture (LastOpeningDto)
 ```http
-GET /getLastOpening
+GET /lastOpening
 ```
 
 ### Ouvre
