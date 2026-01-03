@@ -32,7 +32,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v3
         with:
-          arguments: clean build
+          arguments: build
 
       # 4️⃣ Copy JAR to Raspberry Pi
       - name: Deploy JAR to /opt/henhouse/api
