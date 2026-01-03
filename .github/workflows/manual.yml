@@ -30,7 +30,7 @@ jobs:
           
       # 3️⃣ Build Micronaut JAR
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Build
         run: ./gradlew build
