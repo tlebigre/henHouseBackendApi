@@ -27,8 +27,10 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-
+          
       # 3️⃣ Build Micronaut JAR
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
       - name: Build application
         run: ./gradlew clean assemble
 
