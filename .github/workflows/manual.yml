@@ -38,7 +38,7 @@ jobs:
       - name: Deploy JAR to /opt/henhouse/api
         run: |
           sudo mkdir -p /opt/henhouse/api
-          sudo cp build/libs/*.jar /opt/henhouse/api/
+          sudo cp build/libs/*-all.jar /opt/henhouse/api/app.jar
 
       # 5️⃣ Restart systemd service
       - name: Restart HenHouse API service
