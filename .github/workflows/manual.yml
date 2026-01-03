@@ -35,23 +35,14 @@ jobs:
           arguments: clean build
 
       # 4️⃣ Copy JAR to Raspberry Pi
-      - name: Deploy JAR to Raspberry Pi
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.PI_HOST }}
-          username: ${{ secrets.PI_USER }}
-          key: ${{ secrets.PI_SSH_KEY }}
-          source: "build/libs/*.jar"
-          target: "/opt/henhouse/api"
-          strip_components: 2
+      - name: Deploy JAR to /opt/henhouse/api
+        run: |
+          mkdir -p /opt/henhouse/api
+          cp build/libs/*.jar /opt/henhouse/api/
 
       # 5️⃣ Restart systemd service
-      - name: Restart API service
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.PI_HOST }}
-          username: ${{ secrets.PI_USER }}
-          key: ${{ secrets.PI_SSH_KEY }}
-          script: |
-            sudo systemctl restart henhouse-api
-            sudo systemctl status henhouse-api --no-pager
+      - name: Restart HenHouse API service
+        run: |
+          sudo systemctl daemon-reload
+          sudo systemctl restart henhouse-api
+          sudo systemctl status henhouse-api --no-pager
