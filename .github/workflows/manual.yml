@@ -29,8 +29,10 @@ jobs:
           java-version: 21
           
       # 3️⃣ Build Micronaut JAR
-      - name: Build application
-        run: bash ./gradlew clean assemble
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: clean assemble
 
       # 4️⃣ Copy JAR to Raspberry Pi
       - name: Deploy JAR to Raspberry Pi
