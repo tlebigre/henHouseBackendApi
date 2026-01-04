@@ -14,7 +14,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: [self-hosted, henhouse-api]
 
     steps:
       # 1️⃣ Checkout
