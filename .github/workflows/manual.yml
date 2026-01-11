@@ -17,18 +17,18 @@ jobs:
     runs-on: [self-hosted, henhouse-api]
 
     steps:
-      # 1️⃣ Checkout
+      # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Java (Micronaut)
+      # Java (Micronaut)
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
           
-      # 3️⃣ Build Micronaut JAR
+      # Build Micronaut JAR
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
       - name: Change wrapper permissions
@@ -36,13 +36,19 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      # 4️⃣ Copy JAR to Raspberry Pi
+      # Copy JAR to Raspberry Pi
       - name: Deploy JAR to /opt/henhouse/api
         run: |
           sudo mkdir -p /opt/henhouse/api
           sudo cp build/libs/*-all.jar /opt/henhouse/api/app.jar
 
-      # 5️⃣ Restart systemd service
+      # Inject API_IP into systemd env
+      - name: Configure API_IP environment variable
+        run: |
+          echo "API_IP=${{ secrets.API_IP }}" | sudo tee /etc/henhouse-api.env
+          sudo chmod 600 /etc/henhouse-api.env
+
+      # Restart systemd service
       - name: Restart HenHouse API service
         run: |
           sudo systemctl daemon-reload
