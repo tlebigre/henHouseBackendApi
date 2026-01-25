@@ -157,3 +157,31 @@ GET /open
 ```http
 GET /close
 ```
+
+### /etc/systemd/system/henhouse-api.service
+```bash
+[Unit]
+Description=HenHouse Backend API
+After=network.target
+Wants=network-online.target
+
+[Service]
+User=lebigre
+EnvironmentFile=/etc/henhouse-api.env
+WorkingDirectory=/opt/henhouse/api
+ExecStart=/bin/bash -c '\
+  export API_IP=$(hostname -I | awk "{print \$1}"); \
+  exec /usr/bin/java \
+    -Xms64m \
+    -Xmx256m \
+    -XX:+UseSerialGC \
+    -jar app.jar \
+'
+
+Restart=always
+RestartSec=5
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+```
